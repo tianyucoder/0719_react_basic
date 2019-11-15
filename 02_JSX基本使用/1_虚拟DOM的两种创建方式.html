@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>虚拟DOM的两种创建方式</title>
+  <style>
+    .red{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div id="test1"></div>
+<div id="test2"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入操作react操作DOM库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<!-- 使用js语法创建虚拟DOM -->
+<script type="text/javascript">
+  let myID = 'aTgUiGu' //定义id
+  let myData = 'HeLlO,wOrLd' //定义数据
+  //1.使用js语法创建虚拟DOM
+  let vDOM = React.createElement('h2',{id:myID.toLowerCase()},React.createElement('span',{},myData.toLowerCase()))
+  //2.渲染虚拟DOM到页面
+  ReactDOM.render(vDOM,document.getElementById('test1'))
+</script>
+
+
+<!-- 使用jsx语法创建虚拟DOM -->
+<script type="text/babel">
+  //1.使用jsx语法创建虚拟DOM
+  let vDOM2 = (
+      <div>
+        <h3 id={myID.toUpperCase()}>
+          <span className="red">
+            {myData.toUpperCase()}
+          </span>
+        </h3>
+        <h1>哈喽</h1>
+      </div>
+    )
+  //2.渲染虚拟DOM到页面
+  ReactDOM.render(vDOM2,document.getElementById('test2'))
+</script>
+
+
+
+
+</body>
+</html>
