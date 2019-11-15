@@ -27,6 +27,9 @@
   let myData = 'HeLlO,wOrLd' //定义数据
   //1.使用js语法创建虚拟DOM
   let vDOM = React.createElement('h2',{id:myID.toLowerCase()},React.createElement('span',{},myData.toLowerCase()))
+  //console.log(typeof vDOM);
+  //let test2 = document.getElementById('test2')
+  //debugger;
   //2.渲染虚拟DOM到页面
   ReactDOM.render(vDOM,document.getElementById('test1'))
 </script>
@@ -49,8 +52,11 @@
   ReactDOM.render(vDOM2,document.getElementById('test2'))
 </script>
 
-
-
+<!-- 
+  备注：
+      1.虚拟DOM的本质，到底是什么？js中的一般Oject对象。
+      2.虚拟DOM与真实DOM有何区别？虚拟DOM比较“轻”，真实DOM比较“重”，虚拟DOM上无需有过多的API
+-->
 
 </body>
 </html>

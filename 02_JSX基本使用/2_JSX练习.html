@@ -31,5 +31,31 @@
   <!--引入babel-->
   <script type="text/javascript" src="../js/babel.min.js"></script>
 
+  <script type="text/babel">
+  //准备一些数据
+  let data = ['Angular','React','vue','jQuery'] //数据的数组
+  //let data2 = [<li>Angular</li>,<li>React</li>,<li>vue</li>,<li>jQuery</li>] //标签数组
+
+  //1.创建虚拟DOM
+  let vDOM = (
+    <div>
+        <h2>前端js框架列表</h2>  
+        <ul>
+          {/* 把数据的数组加工成标签的数组 */}
+          {
+            data.map((item,index)=>{
+              /* 我们暂时使用index作为每一个child的key，但是这种某些时候会产生一些问题 */
+              return <li key={index}>{item}</li>
+            })
+          }
+        </ul>
+    </div>
+  )
+
+  //2.渲染虚拟DOM到页面
+  ReactDOM.render(vDOM,document.getElementById('test'))
+  
+  </script>
+
 </body>
 </html>
