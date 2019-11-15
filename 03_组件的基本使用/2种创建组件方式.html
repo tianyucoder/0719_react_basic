@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>2种创建组件方式</title>
+</head>
+<body>
+
+<div id="example1"></div>
+<div id="example2"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入操作react操作DOM库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+//第一种定义组件的方式：使用工厂函数
+function Mycomponent() {
+  return (
+    <div>
+      <h3>我是工厂函数创建的组件（一些简单组件用这种方式创建）</h3>
+      <Haha/>
+    </div>
+  )
+}
+
+function Haha(){
+  return <h3>哈哈</h3>
+}
+
+/* 如果渲染标签时，首字母是小写的，尝试着寻找html与之对应的标签进行渲染，如果未找到报错 */
+/* 如果渲染标签时，首字母是大写的，尝试着寻找组件是否定义*/
+//下面这行代码做了这些事情：1.寻找Mycomponent是否定义。2，若定义了，调用与组件标签同名的那工厂函数，返回值渲染。
+ReactDOM.render(<Mycomponent/>,document.getElementById('example1'))
+
+//第二种定义组件的方式：ES6类组件
+class Mycomponent2 extends React.Component{
+  /* constructor(a){
+    super(a)
+  } */
+  render(){
+    return <h3>我是ES6类组件（一些复杂组件用这种方式创建）</h3>
+  }
+}
+
+//下面这行代码做了这些事情：1.创建了一个Mycomponent2实例。2.通过该实例调用到了render，从而获取了返回值。
+ReactDOM.render(<Mycomponent2/>,document.getElementById('example2'))
+
+</script>
+
+</body>
+</html>
