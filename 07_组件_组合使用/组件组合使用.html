@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>组件组合使用</title>
+</head>
+<body>
+
+<div id="example"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入操作react操作DOM库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--引入传参限制库-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+
+  //App应用组件(最外层的组件)
+  class App extends React.Component{
+    state = {
+      todoArr:['吃饭','睡觉','学习']
+    }
+    addTodo = (data)=>{
+      //获取原状态中的todo数组
+      let {todoArr} = this.state
+      //向todo数组中追加一条数据
+      todoArr.unshift(data)
+      //更新状态
+      this.setState({todoArr:todoArr})
+    }
+    //状态在哪个组件里，更新状态的方法就在哪个组件里
+    render(){
+      let {todoArr} = this.state
+      return (
+        <div>
+          <h1>Simple todo list</h1>
+          <Add addTodo={this.addTodo} count={todoArr.length}/>
+          <List todoArr={todoArr}/>
+        </div>
+      )
+    }
+  }
+
+  //Add组件---用于添加一条数据
+  class Add extends React.Component{
+    add = ()=>{
+      //1.获取用户输入
+      let userInput = this.input.value
+      //2.校验数据
+      if(userInput.trim() === '') return
+      //3.将用户的输入添加到状态里
+      this.props.addTodo(userInput)
+      //4.清空输入框
+      this.input.value = ''
+    }
+    render(){
+      let {count} = this.props
+      return (
+        <div>
+          <input type="text" ref={(input)=>{this.input = input}}/>
+          <button onClick={this.add}>Add #{count}</button>
+        </div>
+      )
+    }
+  }
+
+  //List组件---用于展示列表
+  class List extends React.Component{
+    render(){
+      let {todoArr} = this.props
+      return (
+        <ul>
+          {todoArr.map((item,index) => <li key={index}>{item}</li>)}
+        </ul>
+      )
+    }
+  }
+
+  ReactDOM.render(<App/>,document.getElementById('example'))
+
+</script>
+
+</body>
+</html>
