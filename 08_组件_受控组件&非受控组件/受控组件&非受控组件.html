@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>受控组件&非受控组件</title>
+</head>
+<body>
+<div id="example"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入操作react操作DOM库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+
+  class Login extends React.Component{
+    //初始化状态
+    state = {
+      password:''
+    }
+
+    /* 
+        1.用户名是当表单提交时，获取到的
+        2.密码是当用户输入密码时，用户每输入一位密码，会自动维护到状态中，当点击提交表单时
+          从状态中获取之前收集好的密码，弹窗展示。
+     */
+    submitHandel = (event)=>{
+      //阻止默认事件
+      event.preventDefault()
+      let {username} = this.refs
+      let {password} = this.state
+      //弹窗提示用户的输入
+      alert(`准备提交的用户名是：${username.value}，密码是${password}`)
+    }
+
+    changeHandel = (event)=>{
+      //console.log(event.target.value);
+      this.setState({password:event.target.value})
+    }
+
+
+    render(){
+      return (
+        <form action="https://www.baidu.com" onSubmit={this.submitHandel}>
+            用户名：<input type="text" ref="username"/>
+            密码：<input type="password" onChange={this.changeHandel}/>
+            <button>提交</button>
+        </form>
+      )
+    }
+  }
+
+  ReactDOM.render(<Login/>,document.getElementById('example'))
+
+</script>
+
+</body>
+</html>
