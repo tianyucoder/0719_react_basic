@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>refs与事件处理</title>
+</head>
+<body>
+<br>
+  <div id="example"></div>
+
+  <!--引入react核心库-->
+  <script type="text/javascript" src="../js/react.development.js"></script>
+  <!--引入操作react操作DOM库-->
+  <script type="text/javascript" src="../js/react-dom.development.js"></script>
+  <!--引入babel-->
+  <script type="text/javascript" src="../js/babel.min.js"></script>
+
+  <script type="text/babel">
+      class MyComponent extends React.Component{
+
+        clickHandel = ()=>{
+          alert(this.haha.value);
+        }
+
+        blurHandel = (event)=>{
+          alert(event.target.value);
+        }
+
+        render(){
+          return (
+            <div>
+              <input type="text" ref={(input) => {this.haha = input}}/>&nbsp;
+              <button onClick={this.clickHandel} >点我提示数据</button>&nbsp;
+              <input type="text" placeholder="失去焦点提示" onBlur={this.blurHandel} />
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<MyComponent/>,document.getElementById('example'))
+
+  </script>
+  
+</body>
+</html>

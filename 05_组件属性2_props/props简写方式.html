@@ -51,9 +51,13 @@
 
   //new Person({name:'kobe',age:19,sex:"女"})
   let person = {name:'zhangsan',age:90,sex:'男',phone:'138888888'}
+  
+  setTimeout(()=>{
+    person.name = 'lisi'
+  },2000)
 
   ReactDOM.render(<Person name="kobe" age={19} sex="女"/>,document.getElementById('example1'))
-  ReactDOM.render(<Person {...person}/>,document.getElementById('example1'))
+  ReactDOM.render(<Person {...personArr}/>,document.getElementById('example1'))
   ReactDOM.render(<Person  name="wade"/>,document.getElementById('example2'))
 </script>
 
