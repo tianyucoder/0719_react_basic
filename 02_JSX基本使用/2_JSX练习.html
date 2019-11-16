@@ -47,6 +47,9 @@
               /* 我们暂时使用index作为每一个child的key，但是这种某些时候会产生一些问题，后面会仔细分析 */
               return <li key={index}>{item}</li>
             })
+            /* 
+              简写方式：data.map((item,index)=> <li key={index}>{item}</li>)
+             */
           }
         </ul>
     </div>

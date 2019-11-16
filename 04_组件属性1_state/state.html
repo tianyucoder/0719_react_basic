@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>state</title>
+  <style>
+    .demo{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="example1"></div>
+<div id="example2"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入操作react操作DOM库-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+
+  //1.定义组件--class
+  class Weather extends React.Component{
+    constructor(a){
+      //构造器里的this是组件类的实例对象
+      super(a)
+      this.state = {isHot:false,haha:'nice'}
+      this.demo = this.demo.bind(this)
+    }
+    //我们自己定义的demo，不是重写父类里已经存在的demo
+    demo() {
+      let {isHot} = this.state
+      //demo里的this是undefined ???
+      //在类组件中，所以我们编码人员自己定义的方法中this都是undefined
+      //console.log(this);
+      //组件实例对象的state：1.不能直接修改 2.不能直接更新
+      //this.state.isHot = !this.state.isHot
+      this.setState({isHot:!isHot})
+    }
+    //重写父类的render
+    render(){
+      //render里的this是组件类的实例对象
+      let {isHot} = this.state
+      return <h1 className="demo" onClick={this.demo}>今天天气很{isHot ? '炎热' : '凉爽'}</h1>
+    }
+  }
+
+  
+
+  //2.渲染组件标签
+  ReactDOM.render(<Weather/>,document.getElementById('example1'))
+
+</script>
+
+</body>
+</html>
+

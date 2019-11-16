@@ -19,9 +19,10 @@
 <script type="text/babel">
 //第一种定义组件的方式：使用工厂函数
 function Mycomponent() {
+  console.log(this); //工厂函数中的this是undefined
   return (
     <div>
-      <h3>我是工厂函数创建的组件（一些简单组件用这种方式创建）</h3>
+      <h3>我是工厂函数创建的组件（一些简单组件用这种方式创建,即：无状态）</h3>
       <Haha/>
     </div>
   )
@@ -38,11 +39,10 @@ ReactDOM.render(<Mycomponent/>,document.getElementById('example1'))
 
 //第二种定义组件的方式：ES6类组件
 class Mycomponent2 extends React.Component{
-  /* constructor(a){
-    super(a)
-  } */
   render(){
-    return <h3>我是ES6类组件（一些复杂组件用这种方式创建）</h3>
+    //类组件中render方法里的this是组件类的实例对象
+    console.log(this);
+    return <h3>我是????组件（一些复杂组件用这种方式创建，即：状态）</h3>
   }
 }
 
