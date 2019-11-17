@@ -23,21 +23,24 @@
    */
 
    class Life extends React.Component{
+     //构造器
      constructor(a){
        console.log('--constructor--');
        super(a)
      }
 
+    //初始化状态
     state = {
       opacity:1
     }
 
+    //组件将要挂载
     componentWillMount(){
       console.log('--componentWillMount--');
     }
     
     //当组件被“放在”页面上后，紧随其后开一个定时器
-    //一般会在componentDidMount里：1.开定时器 2.发送异步ajax请求 .......
+    //一般会在该回调里：开定时器、发送异步ajax请求......等初始化工作
     componentDidMount(){
       console.log('--componentDidMount--');
       this.timeId = setInterval(() =>{
@@ -50,23 +53,28 @@
       },200)
     }
 
+    //组件将要更新
     componentWillUpdate(){
       console.log('--componentWillUpdate--');
     }
 
+    //组件已经更新
     componentDidUpdate(){
       console.log('--componentDidUpdate--');
     }
 
-    //一般在componentWillUnmount做一些收尾性工作
+    //组件将要卸载，一般在该回调里做收尾性工作，如：关闭定时器、断开一些连接......等收尾工作
     componentWillUnmount(){
       console.log('--componentWillUnmount--');
       clearInterval(this.timeId)
     }
 
+    //用于控制组件是否应该更新
     shouldComponentUpdate(){
       return true
     }
+    
+    //自定义的death方法，调用该方法把组件从页面中卸载
     death = ()=>{
       ReactDOM.unmountComponentAtNode(document.getElementById('example'))
     }
