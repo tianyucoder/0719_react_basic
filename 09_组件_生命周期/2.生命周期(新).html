@@ -32,15 +32,20 @@
       },2000)
     }
 
-    componentDidUpdate(){
-      console.log('--componentDidUpdate--');
+    componentDidUpdate(props,state,data){
+      console.log('--componentDidUpdate--',props,state,data);
     }
 
     //getDerivedStateFromProps钩子用于取代：componentWillMount、componentWillUpdate
-    static getDerivedStateFromProps(props,state){
+    /* static getDerivedStateFromProps(props,state){
       console.log('--getDerivedStateFromProps--',props,state);
       //return {data:props.name}
       return props
+    } */
+
+    getSnapshotBeforeUpdate(props,state){
+      console.log('--getSnapshotBeforeUpdate--',props,state);
+      return 'peiqi'
     }
 
 
