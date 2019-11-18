@@ -23,6 +23,23 @@
    */
 
    class Life extends React.Component{
+
+     /* 
+        1.【初始化】
+        触发条件：ReactDOM.render(<MyComponent/>)
+          constructor()
+          componentWillMount()
+          render():提供虚拟DOM，可能会调用多次(1+n)。
+          componentDidMount()：启动定时器、发送Ajax请求、只执行一次。 
+      2.【更新】
+          触发条件：this.setState({})
+            componentWillUpdate()
+            render()
+            componentDidUpdate() 
+      3.【卸载】
+          触发条件：ReactDOM.unmountComponentAtNode()
+          componentWillUnmount()：收尾工作，例如：清除定时器，只执行一次。
+      */
      //构造器
      constructor(a){
        console.log('--constructor--');
@@ -43,14 +60,14 @@
     //一般会在该回调里：开定时器、发送异步ajax请求......等初始化工作
     componentDidMount(){
       console.log('--componentDidMount--');
-      this.timeId = setInterval(() =>{
+      /* this.timeId = setInterval(() =>{
         let {opacity} = this.state
         opacity -= 0.1
         if(opacity <= 0){
         opacity = 1
         }
         this.setState({opacity})
-      },200)
+      },200) */
     }
 
     //组件将要更新
@@ -65,8 +82,8 @@
 
     //组件将要卸载，一般在该回调里做收尾性工作，如：关闭定时器、断开一些连接......等收尾工作
     componentWillUnmount(){
-      console.log('--componentWillUnmount--');
       clearInterval(this.timeId)
+      console.log('--componentWillUnmount--');
     }
 
     //用于控制组件是否应该更新
@@ -79,12 +96,16 @@
       ReactDOM.unmountComponentAtNode(document.getElementById('example'))
     }
 
+    demo = ()=>{
+      this.forceUpdate()
+    }
      render(){
        console.log('--render--');
        return (
          <div>
           <h1 style={{opacity:this.state.opacity}}>React学不会怎么办？</h1>
           <button onClick={this.death}>不活了</button>
+          <button onClick={this.demo}>强制更新一下</button>
          </div>
        )
      }
